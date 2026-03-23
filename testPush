@@ -1,1 +1,3 @@
-test
+npm i express mongoose bcrypt jsonwebtoken dotenv cors
+npm i -D typescript ts-node @types/node @types/express @types/cors @types/jsonwebtoken @types/bcrypt
+npx tsc --init
