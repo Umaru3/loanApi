@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 import loanRoutes from './routes/loanRoute';
+import userRoutes from './routes/userRoutes';
 
 dotenv.config();
 const app = express();
@@ -14,7 +15,6 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
@@ -29,6 +29,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use('/api/loan', loanRoutes);
+app.use('/api/user', userRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
