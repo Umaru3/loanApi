@@ -12,6 +12,7 @@ export const loginUser = async (identifier: string, password: string) => {
     if(!identifier || !password) {
       return "Missing required fields required.";
     }
+    
     const user = await User.findOne({ $or: [{ email: identifier }, { username: identifier }], deleteFlag: 0 });
     if (!user) { return "User not found."; }
 
@@ -22,6 +23,7 @@ export const loginUser = async (identifier: string, password: string) => {
       {id: user._id, email: user.email, username: user.username}, 
       JWT_SECRET, 
       { expiresIn: "1h" });
+
     return { message: "Successfully logged in.", username: user.username, token };
   } catch (error) {
     console.error("Error logging in user:", error);
@@ -29,6 +31,7 @@ export const loginUser = async (identifier: string, password: string) => {
   }
 };
 
+//registerUser
 export const registerUser = async (data: { username: string; email: string; password: string }) => {
   try {
     const emailRegex = /.+\@.+\..+/;
