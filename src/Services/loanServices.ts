@@ -102,3 +102,25 @@ export const loanPay = async (loanId: string, amountPaid: number) => {
     throw error;
   }
 };
+
+export const getLoanById = async (loanId: string) => {
+  try {
+    const loan = await Loan.findById(loanId);
+    if (!loan) throw new Error("Loan not found");
+    return loan;
+  } catch (error) {
+      console.error("Error fetching loan by ID:", error);
+      throw error;
+  }
+}
+
+export const getLoansByUserId = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).populate('userLoans');
+    if (!user) throw new Error("User not found");
+    return user.userLoans;
+  } catch (error) {
+    console.error("Error fetching loans by user ID:", error);
+    throw error;
+  }
+}
