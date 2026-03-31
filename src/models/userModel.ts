@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
     createdAt: { type: Date, default: Date.now },
     deletedAt: { type: Date, default: 0 },
-    userLoans: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Loan' }] 
+    userLoans: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Loan' }],
+    deleteFlag: { type: Number, default: 0 }
 })
 
 userSchema.pre("save", async function () {
