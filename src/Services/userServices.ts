@@ -38,7 +38,6 @@ export const registerUser = async (data: { username: string; email: string; pass
     const existingUser = await User.findOne({ username: data.username });
     const existingEmail = await User.findOne({ email: data.email });
 
-    //basic checks
     if (!data) {
       return "Missing data";
     } else if (!data.username) {
@@ -49,18 +48,14 @@ export const registerUser = async (data: { username: string; email: string; pass
       return "Missing required fields: password is required.";
     }
     
-    //email format validation
     if (!emailRegex.test(data.email)) {
       return "Invalid email format.";
     }
 
-    //username already exists checker
     if (existingUser && existingUser.username === data.username) {
-        console.log("Existing user found:", existingUser);
       return "Username already exists.";
     }
 
-    //email already exists checker
     if (existingEmail && existingEmail.email === data.email) {
       return "Email already exists.";
     }
